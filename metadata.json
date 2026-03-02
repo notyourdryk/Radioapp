@@ -1,0 +1,5 @@
+{
+  "name": "Radioplayer.ru 2.0",
+  "description": "Modern PWA radio aggregator with high-fidelity audio and persistent playback.",
+  "requestFramePermissions": ["geolocation"]
+}
