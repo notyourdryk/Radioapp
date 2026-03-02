@@ -48,7 +48,7 @@ export default function Hero({ stations, onPlay, onGenreClick }: HeroProps) {
   };
 
   return (
-    <section className="relative w-full aspect-[21/9] min-h-[400px] rounded-3xl overflow-hidden border border-border group bg-background">
+    <section className="relative w-full max-w-5xl mx-auto aspect-[21/9] min-h-[300px] rounded-3xl overflow-hidden border border-border group bg-background">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={currentIndex}

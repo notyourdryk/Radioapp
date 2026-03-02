@@ -30,7 +30,7 @@ export default function NowPlayingHero({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="relative w-full rounded-[32px] overflow-hidden mb-8 shadow-2xl"
+      className="relative w-full max-w-4xl mx-auto rounded-[32px] overflow-hidden mb-8 shadow-2xl"
     >
       {/* Animated Background */}
       <div 
@@ -57,11 +57,11 @@ export default function NowPlayingHero({
         }}
       />
 
-      <div className="relative bg-secondary/40 backdrop-blur-xl border border-border p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6 md:gap-8">
+      <div className="relative bg-secondary/40 backdrop-blur-xl border border-border p-4 sm:p-6 lg:p-8 flex flex-col md:flex-row items-center gap-4 sm:gap-6 md:gap-8">
         {/* Left Side: Station Info */}
-        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shadow-xl shrink-0 border border-border">
+        <div className="flex-1 flex flex-col items-start text-left w-full">
+          <div className="flex items-center gap-4 mb-4 sm:mb-6 w-full">
+            <div className="w-16 h-16 sm:w-20 sm:h-24 rounded-2xl overflow-hidden shadow-xl shrink-0 border border-border">
               <img 
                 src={station.logo} 
                 alt={station.name} 
@@ -69,42 +69,45 @@ export default function NowPlayingHero({
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start flex-1 min-w-0">
               <button
                 onClick={() => onGenreClick?.(station.genre)}
-                className="px-3 py-1 bg-background/50 rounded-full text-xs font-bold uppercase tracking-widest text-muted-foreground mb-2 hover:text-primary hover:bg-background transition-colors"
+                className="px-2 py-1 sm:px-3 sm:py-1 bg-background/50 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1 sm:mb-2 hover:text-primary hover:bg-background transition-colors"
               >
                 {station.genre}
               </button>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tighter">
+              <h1 className="text-xl sm:text-3xl lg:text-4xl font-black tracking-tighter truncate w-full">
                 {station.name}
               </h1>
+              <p className="text-sm text-muted-foreground md:hidden mt-1 truncate w-full">
+                {station.nowPlaying?.artist} — {station.nowPlaying?.title}
+              </p>
             </div>
           </div>
 
-          <p className="text-muted-foreground text-base mb-6 max-w-md line-clamp-2">
+          <p className="hidden md:block text-muted-foreground text-base mb-6 max-w-md line-clamp-2">
             {station.description || 'Слушайте лучшую музыку и интересные программы в прямом эфире.'}
           </p>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
             <button
               onClick={() => onPlay(station)}
-              className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all shrink-0"
               style={{ backgroundColor: color, color: '#fff' }}
             >
-              {isPlaying ? <Pause fill="currentColor" /> : <Play fill="currentColor" className="ml-1" />}
+              {isPlaying ? <Pause fill="currentColor" size={20} /> : <Play fill="currentColor" size={20} className="ml-1" />}
             </button>
             
             <button
               onClick={() => onToggleFavorite(station.id)}
-              className={`w-14 h-14 rounded-full flex items-center justify-center bg-background/50 border border-border hover:bg-background transition-colors ${isFavorite ? 'text-primary' : 'text-muted-foreground'}`}
+              className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center bg-background/50 border border-border hover:bg-background transition-colors shrink-0 ${isFavorite ? 'text-primary' : 'text-muted-foreground'}`}
             >
-              <Heart size={24} fill={isFavorite ? "currentColor" : "none"} />
+              <Heart size={20} fill={isFavorite ? "currentColor" : "none"} />
             </button>
 
             <button
               onClick={() => onViewStation(station)}
-              className="px-6 h-14 rounded-full flex items-center justify-center bg-background/50 border border-border hover:bg-background transition-colors font-bold text-sm"
+              className="flex-1 sm:flex-none px-4 sm:px-6 h-12 sm:h-14 rounded-full flex items-center justify-center bg-background/50 border border-border hover:bg-background transition-colors font-bold text-sm"
             >
               Подробнее
             </button>
@@ -112,7 +115,7 @@ export default function NowPlayingHero({
         </div>
 
         {/* Right Side: Now Playing */}
-        <div className="w-full md:w-[280px] lg:w-[320px] shrink-0">
+        <div className="hidden md:block w-[280px] lg:w-[320px] shrink-0">
           <div className="bg-background/60 border border-border rounded-3xl p-4 sm:p-5 shadow-xl relative overflow-hidden group">
             <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
               <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />

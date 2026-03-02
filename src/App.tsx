@@ -279,7 +279,7 @@ export default function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="space-y-16"
+              className="space-y-8 sm:space-y-12"
             >
               {/* Now Playing Hero */}
               {activeStation && (
